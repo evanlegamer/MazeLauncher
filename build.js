@@ -18,8 +18,8 @@ function getCurrentPlatform(){
 builder.build({
     targets: (process.argv[2] != null && Platform[process.argv[2]] != null ? Platform[process.argv[2]] : getCurrentPlatform()).createTarget(),
     config: {
-        appId: 'electronlauncher',
-        productName: 'Electron Launcher',
+        appId: 'mazelauncher',
+        productName: 'MazeLauncher',
         artifactName: '${productName}.${ext}',
         copyright: 'Copyright © 2018-2019 Daniel Scalzi',
         directories: {

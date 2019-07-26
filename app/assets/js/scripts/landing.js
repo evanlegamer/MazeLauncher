@@ -130,7 +130,7 @@ function updateSelectedAccount(authUser){
             username = authUser.displayName
         }
         if(authUser.uuid != null){
-            document.getElementById('avatarContainer').style.backgroundImage = `url('https://crafatar.com/renders/body/${authUser.uuid}')`
+            document.getElementById('avatarContainer').style.backgroundImage = `url('https://crafatar.com/renders/head/${authUser.uuid}')`
         }
     }
     user_text.innerHTML = username
@@ -226,6 +226,7 @@ const refreshServerStatus = async function(fade = false){
     try {
         const serverURL = new URL('my://' + serv.getAddress())
         const servStat = await ServerStatus.getStatus(serverURL.hostname, serverURL.port)
+        loggerLanding.warn(servStat);
         if(servStat.online){
             pLabel = 'PLAYERS'
             pVal = servStat.onlinePlayers + '/' + servStat.maxPlayers
@@ -323,7 +324,7 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                 // Show this information to the user.
                 setOverlayContent(
                     'No Compatible<br>Java Installation Found',
-                    'In order to join WesterosCraft, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
+                    'In order to join Mazecity, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
                     'Install Java',
                     'Install Manually'
                 )
@@ -669,7 +670,7 @@ function dlAsync(login = true){
                     if(SERVER_JOINED_REGEX.test(data)){
                         DiscordWrapper.updateDetails('Exploring the Realm!')
                     } else if(GAME_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Sailing to Westeros!')
+                        DiscordWrapper.updateDetails('Acting in Mazecity!')
                     }
                 }
 
@@ -755,6 +756,9 @@ function dlAsync(login = true){
 // DOM Cache
 const newsContent                   = document.getElementById('newsContent')
 const newsArticleTitle              = document.getElementById('newsArticleTitle')
+const newsImageLink                 = document.getElementById('newsImageLink')
+const newsArticleImage              = document.getElementById('newsArticleImage')
+const newsArticleDescription        = document.getElementById('newsArticleDescription')
 const newsArticleDate               = document.getElementById('newsArticleDate')
 const newsArticleAuthor             = document.getElementById('newsArticleAuthor')
 const newsArticleComments           = document.getElementById('newsArticleComments')
@@ -1052,7 +1056,10 @@ document.addEventListener('keydown', (e) => {
 function displayArticle(articleObject, index){
     newsArticleTitle.innerHTML = articleObject.title
     newsArticleTitle.href = articleObject.link
-    newsArticleAuthor.innerHTML = 'by ' + articleObject.author
+    newsImageLink.href = articleObject.link
+    newsArticleImage.src = articleObject.image
+    newsArticleDescription.innerHTML = articleObject.content
+    newsArticleAuthor.innerHTML = 'par ' + articleObject.author
     newsArticleDate.innerHTML = articleObject.date
     newsArticleComments.innerHTML = articleObject.comments
     newsArticleComments.href = articleObject.commentsLink
@@ -1088,23 +1095,18 @@ function loadNews(){
                         const el = $(items[i])
 
                         // Resolve date.
-                        const date = new Date(el.find('pubDate').text()).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'})
+                        const date = new Date(el.find('pubDate').text()).toLocaleDateString('fr-fr', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'})
 
                         // Resolve comments.
                         let comments = el.find('slash\\:comments').text() || '0'
                         comments = comments + ' Comment' + (comments === '1' ? '' : 's')
 
                         // Fix relative links in content.
-                        let content = el.find('content\\:encoded').text()
-                        let regex = /src="(?!http:\/\/|https:\/\/)(.+?)"/g
-                        let matches
-                        while((matches = regex.exec(content))){
-                            content = content.replace(`"${matches[1]}"`, `"${newsHost + matches[1]}"`)
-                        }
-
+                        let content = el.find('description').text()
                         let link   = el.find('link').text()
                         let title  = el.find('title').text()
-                        let author = el.find('dc\\:creator').text()
+                        let author = el.find('creator').text()
+                        let image = el.find('image').text()
 
                         // Generate article.
                         articles.push(
@@ -1114,6 +1116,7 @@ function loadNews(){
                                 date,
                                 author,
                                 content,
+                                image,
                                 comments,
                                 commentsLink: link + '#comments'
                             }

@@ -332,7 +332,7 @@ class ProcessBuilder {
         // JVM Arguments First
         let args = this.versionData.arguments.jvm
 
-        //args.push('-Dlog4j.configurationFile=D:\\WesterosCraft\\game\\common\\assets\\log_configs\\client-1.12.xml')
+        //args.push('-Dlog4j.configurationFile=D:\\MazeLauncher\\game\\common\\assets\\log_configs\\client-1.12.xml')
 
         // Java Arguments
         if(process.platform === 'darwin'){
