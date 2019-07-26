@@ -1,13 +1,13 @@
 {
-  "name": "electronlauncher",
-  "version": "1.6.0",
-  "productName": "Electron Launcher",
+  "name": "MazeLauncher",
+  "version": "1.0.0",
+  "productName": "MazeLauncher",
   "description": "Modded Minecraft Launcher",
-  "author": "Daniel Scalzi (https://github.com/dscalzi/)",
+  "author": "Evanlegamer (https://github.com/evanlegamer/)",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/ElectronLauncher",
+  "homepage": "https://github.com/evanlegamer/MazeLauncher",
   "bugs": {
-    "url": "https://github.com/dscalzi/ElectronLauncher/issues"
+    "url": "https://github.com/evanlegamer/MazeLauncher/issues"
   },
   "private": true,
   "main": "index.js",
@@ -47,6 +47,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dscalzi/ElectronLauncher.git"
+    "url": "git+https://github.com/evanlegamer/MazeLauncher.git"
   }
 }
