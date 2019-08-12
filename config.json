@@ -1,0 +1,53 @@
+{
+  "application": {
+    "id": 600394994733547532,
+    "manifests": [
+      {
+        "label": "mazelauncher/windows",
+        "platforms": ["win32", "win64"],
+        "locales": [],
+        "local_root": "./dist/win-unpacked",
+        "file_rules": null,
+        "storage": null,
+        "registry_keys": [
+          {
+            "key": "Software\\Mazecity\\Mazelauncher\\installed",
+            "value": "1"
+          }
+        ],
+        "launch_options": [
+          {
+            "name": "Mazecity",
+            "executable": "dist/win-unpacked/MazeLauncher.exe",
+            "arguments": [],
+            "platforms": ["win32", "win64"],
+            "working_dir": ""
+          }
+        ]
+      },
+	   {
+        "label": "mazelauncher/linux",
+        "platforms": ["linux"],
+        "locales": [],
+        "local_root": "./dist/linux-unpacked",
+        "file_rules": null,
+        "storage": null,
+        "registry_keys": [
+          {
+            "key": "Software\\Mazecity\\Mazelauncher\\installed",
+            "value": "1"
+          }
+        ],
+        "launch_options": [
+          {
+            "name": "Mazecity",
+            "executable": "dist/linux-unpacked/MazeLauncher.AppImage",
+            "arguments": [],
+            "platforms": ["linux"],
+            "working_dir": ""
+          }
+        ]
+      }
+    ]
+  }
+}
