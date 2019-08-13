@@ -43,11 +43,6 @@ deploy:
     secure: LPwtTKGnHfgImff7NnE4XxpirR+KnABsavKdVV+HttoFA4HgQAE9wTTfJS8y1YbfuSEl2cs1r7+zTtKCgu3eb9ZqFj8XJzMHmBv2mn2yPps/j5o1BRn7sLYeTgYkWLcfdAVrx9MMUeUoldJqzqdTfqSi1qNY5QDoeTXRKgDiFAjqpMsTybsKE1b1WroZ0RJ2gpSSKvuMUnH4MHHOlPvnap8NHWHIB8lA9Jxrr6iV6MptWP0121LedaiQYWxPPIx2Qk0687WZCzlIyjjbXw4qyJAShMlGpnf09izhtws5vP6J4fWFcvUx8OlutvoJ8P2GNn4OA7RZFznWg7IXXy5GoqqwYZLYn/nh7/lCU5eE95CwynVhQ3la9cdEohNsUzaem3IokYnyOaNgH7klHHT++mhdztJRykMkSSryBNZimV39IpZGXkC9RqyhzfkHMgCBwOa8+U4jMvyZ6avE/nuzYWXYvPh5FcoJ8w7juqifNr10ecBgFGPM+MeizE9MNwqBHV+0YKTsM9yNXCtehQ724Q5VYKOlAym8DxbNN/2xl7otfwWI48uFRMZc8hyppL7OnF4oUI4Skt9mKO2oqKyl0xJ3NXGaGWVWsfVP5qZIhA6uStNlfq8ectZQ/NnMHbUMV7Cg3Z+rSBtNgYdavdPKKEZwV0SDYFKH0EOh4hVZjeU=
   skip_cleanup: true
   file: 
-     - dist/MazeLauncher.dmg
-     - dist/latest-mac.yml
-     - dist/MazeLauncher.AppImage
-     - dist/latest-linux.yml
-     - dist/latest.yml
-     - dist/MazeLauncher.exe
+    - dist/* 
   on:
     repo: evanlegamer/MazeLauncher

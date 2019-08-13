@@ -21,7 +21,7 @@ builder.build({
         appId: 'mazelauncher',
         productName: 'MazeLauncher',
         artifactName: '${productName}.${ext}',
-        copyright: 'Copyright © 2018-2019 Daniel Scalzi',
+        copyright: 'Copyright © 2018-2019 MazeLauncher',
         directories: {
             buildResources: 'build',
             output: 'dist'

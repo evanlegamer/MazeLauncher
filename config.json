@@ -47,7 +47,7 @@
             "working_dir": ""
           }
         ]
-      }
+      },
       {
         "label": "mazelauncher/osx",
         "platforms": ["osx"],
