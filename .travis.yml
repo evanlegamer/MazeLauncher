@@ -1,44 +1,53 @@
 matrix:
   include:
-    - os: osx
-      osx_image: xcode11
-      language: node_js
-      node_js: "12"
-      env:
-        - ELECTRON_CACHE=$HOME/.cache/electron
-        - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-        - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
-        - CSC_IDENTITY_AUTO_DISCOVERY=false
-
-    - os: linux
-      services: docker
-      language: generic
-      env:
-        - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
-
+  - os: osx
+    osx_image: xcode11
+    language: node_js
+    node_js: '12'
+    env:
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+    - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
+    - CSC_IDENTITY_AUTO_DISCOVERY=false
+  - os: linux
+    services: docker
+    language: generic
+    env:
+    - ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true
 cache:
   directories:
   - node_modules
-  - $HOME/.cache/electron
-  - $HOME/.cache/electron-builder
-
+  - "$HOME/.cache/electron"
+  - "$HOME/.cache/electron-builder"
 script:
-  - |
-    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      ENVS=`env | grep -iE '(DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_)' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
-      docker run $ENVS --rm \
-        -v ${PWD}:/project \
-        -v ~/.cache/electron:/root/.cache/electron \
-        -v ~/.cache/electron-builder:/root/.cache/electron-builder \
-        electronuserland/builder:wine \
-        /bin/bash -c "node -v && npm ci && npm run cilinux"
-    else
-      npm run cidarwin
-    fi
-
+- |
+  if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+    ENVS=`env | grep -iE '(DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_)' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
+    docker run $ENVS --rm \
+      -v ${PWD}:/project \
+      -v ~/.cache/electron:/root/.cache/electron \
+      -v ~/.cache/electron-builder:/root/.cache/electron-builder \
+      electronuserland/builder:wine \
+      /bin/bash -c "node -v && npm ci && npm run cilinux"
+  else
+    npm run cidarwin
+  fi
 before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
-
+- rm -rf $HOME/.cache/electron-builder/wine
 branches:
   except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
+  - "/^v\\d+\\.\\d+\\.\\d+$/"
+deploy:
+  provider: releases
+  api_key:
+    secure: LPwtTKGnHfgImff7NnE4XxpirR+KnABsavKdVV+HttoFA4HgQAE9wTTfJS8y1YbfuSEl2cs1r7+zTtKCgu3eb9ZqFj8XJzMHmBv2mn2yPps/j5o1BRn7sLYeTgYkWLcfdAVrx9MMUeUoldJqzqdTfqSi1qNY5QDoeTXRKgDiFAjqpMsTybsKE1b1WroZ0RJ2gpSSKvuMUnH4MHHOlPvnap8NHWHIB8lA9Jxrr6iV6MptWP0121LedaiQYWxPPIx2Qk0687WZCzlIyjjbXw4qyJAShMlGpnf09izhtws5vP6J4fWFcvUx8OlutvoJ8P2GNn4OA7RZFznWg7IXXy5GoqqwYZLYn/nh7/lCU5eE95CwynVhQ3la9cdEohNsUzaem3IokYnyOaNgH7klHHT++mhdztJRykMkSSryBNZimV39IpZGXkC9RqyhzfkHMgCBwOa8+U4jMvyZ6avE/nuzYWXYvPh5FcoJ8w7juqifNr10ecBgFGPM+MeizE9MNwqBHV+0YKTsM9yNXCtehQ724Q5VYKOlAym8DxbNN/2xl7otfwWI48uFRMZc8hyppL7OnF4oUI4Skt9mKO2oqKyl0xJ3NXGaGWVWsfVP5qZIhA6uStNlfq8ectZQ/NnMHbUMV7Cg3Z+rSBtNgYdavdPKKEZwV0SDYFKH0EOh4hVZjeU=
+  skip_cleanup: true
+  file: 
+     - dist/MazeLauncher.dmg
+     - dist/latest-mac.yml
+     - dist/MazeLauncher.AppImage
+     - dist/latest-linux.yml
+     - dist/latest.yml
+     - dist/MazeLauncher.exe
+  on:
+    repo: evanlegamer/MazeLauncher
