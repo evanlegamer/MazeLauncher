@@ -2,9 +2,9 @@
 
 <h1 align="center"> MazeLauncher</h1>
 
-[<p align="center"><img src="https://img.shields.io/travis/dscalzi/ElectronLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/dscalzi/ElectronLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/ElectronLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/evanlegamer/MazeLauncher/releases) <img src="https://forthebadge.com/images/badges/winter-is-coming.svg"  height="28px" alt="stark"></p>
+[<p align="center"><img src="https://travis-ci.org/evanlegamer/MazeLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/evanlegamer) [<img src="https://img.shields.io/github/downloads/dscalzi/ElectronLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/evanlegamer/MazeLauncher/releases) <img src="https://forthebadge.com/images/badges/powered-by-electricity.svg"  height="28px" alt="stark"></p>
 
-<p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
+<p align="center">Join Mazecity servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
 ![Screenshot 1](https://i.imgur.com/HG8WJAT.png)
 ![Screenshot 2](https://i.imgur.com/sqccVpc.png)

@@ -48,6 +48,29 @@
           }
         ]
       }
+      {
+        "label": "mazelauncher/osx",
+        "platforms": ["osx"],
+        "locales": [],
+        "local_root": "./dist/osx-unpacked",
+        "file_rules": null,
+        "storage": null,
+        "registry_keys": [
+          {
+            "key": "Software\\Mazecity\\Mazelauncher\\installed",
+            "value": "1"
+          }
+        ],
+        "launch_options": [
+          {
+            "name": "Mazecity",
+            "executable": "dist/osx-unpacked/MazeLauncher.AppImage",
+            "arguments": [],
+            "platforms": ["osx"],
+            "working_dir": ""
+          }
+        ]
+      }
     ]
   }
 }
