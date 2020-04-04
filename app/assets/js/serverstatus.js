@@ -1,4 +1,4 @@
-const net = require('net')
+//const net = require('net')
 const request = require('request')
 
 /**
@@ -80,7 +80,7 @@ exports.getStatus = function(address, port = 25565){
 
 exports.getStatus = function(address){
     return new Promise((resolve, reject) => {
-        request.get('https://mcapi.us/server/status?ip=mazecity.boxtoplay.com',
+        request.get('https://api.mcsrvstat.us/2/mazecraft.mine.gg',
             {
                 json: true,
                 timeout: 2500
@@ -88,21 +88,19 @@ exports.getStatus = function(address){
             function(error, response, body){
 
                 if(error || response.statusCode !== 200){
-                    logger.warn('Unable to retrieve Mazecity status.')
-                    logger.debug('Error while retrieving Mazecity statuses:', error)
-                    //reject(error || response.statusCode)
+                    reject(error || response.statusCode)
                     resolve({
                         online: false
                     })
                 } else {
                     resolve({
                         online: true,
-                        version: body.server.name.replace(/\u0000/g, ''),
-                        motd: body.motd.replace(/\u0000/g, ''),
-                        onlinePlayers: body.players.now,
+                        version: body.version,
+                        onlinePlayers: body.players.online,
                         maxPlayers: body.players.max
                     })
                 }
             })
+        console.log(request)
     })
 }

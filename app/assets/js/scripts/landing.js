@@ -519,13 +519,13 @@ function dlAsync(login = true){
         loggerAEx.log(data)
     })
     aEx.on('error', (err) => {
-        loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure('Error During Launch', err.message || 'See console (CTRL + Shift + i) for more details.')
+        loggerLaunchSuite.error('Error during launch 1', err)
+        showLaunchFailure('Error During Launch 1', err.message || 'See console (CTRL + Shift + i) for more details.')
     })
     aEx.on('close', (code, signal) => {
         if(code !== 0){
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error During Launch', 'See console (CTRL + Shift + i) for more details.')
+            showLaunchFailure('Error During Launch 1', 'See console (CTRL + Shift + i) for more details.')
         }
     })
 
@@ -633,8 +633,8 @@ function dlAsync(login = true){
             if(m.result.forgeData == null || m.result.versionData == null){
                 loggerLaunchSuite.error('Error during validation:', m.result)
 
-                loggerLaunchSuite.error('Error during launch', m.result.error)
-                showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                loggerLaunchSuite.error('Error during launch 2, No Forge downloaded', m.result.error)
+                showLaunchFailure('Error during launch 2, No Forge downloaded', 'Please check the console (CTRL + Shift + i) for more details.')
 
                 allGood = false
             }
@@ -707,8 +707,8 @@ function dlAsync(login = true){
 
                 } catch(err) {
 
-                    loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                    loggerLaunchSuite.error('Error during launch 3', err)
+                    showLaunchFailure('Error During Launch 3', 'Please check the console (CTRL + Shift + i) for more details.')
 
                 }
             }

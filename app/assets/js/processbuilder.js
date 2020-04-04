@@ -306,6 +306,10 @@ class ProcessBuilder {
         args = args.concat(ConfigManager.getJVMOptions())
         args.push('-Djava.library.path=' + tempNativePath)
 
+        args.push('-Duuid=' +this.authUser.uuid.trim())
+        args.push('-Dtoken=' +this.authUser.accessToken)
+        args.push('-D' +this.authUser.accessToken)
+
         // Main Java Class
         args.push(this.forgeData.mainClass)
 
@@ -503,7 +507,7 @@ class ProcessBuilder {
                         val = this.authUser.accessToken
                         break
                     case 'user_type':
-                        val = 'mojang'
+                        val = 'mazecity'
                         break
                     case 'version_type':
                         val = this.versionData.type

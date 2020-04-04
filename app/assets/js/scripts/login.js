@@ -261,7 +261,6 @@ loginButton.addEventListener('click', () => {
 
     // Show loading stuff.
     loginLoading(true)
-
     AuthManager.addAccount(loginUsername.value, loginPassword.value).then((value) => {
         updateSelectedAccount(value)
         loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.loggingIn'), Lang.queryJS('login.success'))
@@ -294,7 +293,7 @@ loginButton.addEventListener('click', () => {
             toggleOverlay(false)
         })
         toggleOverlay(true)
-        loggerLogin.log('Error while logging in.', err)
+        loggerLogin.log('Error while logging in.', err, loginUsername.value, loginPassword.value)
     })
 
 })

@@ -26,7 +26,7 @@ window.eval = global.eval = function () {
 
 // Display warning when devtools window is opened.
 remote.getCurrentWebContents().on('devtools-opened', () => {
-    console.log('%cThe console is dark and full of terrors.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
+    console.log('%cNe regardez pas la console si on ne vous l\'a pas demandé', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
     console.log('%cIf you\'ve been told to paste something here, you\'re being scammed.', 'font-size: 16px')
     console.log('%cUnless you know exactly what you\'re doing, close this window.', 'font-size: 16px')
 })
@@ -34,7 +34,6 @@ remote.getCurrentWebContents().on('devtools-opened', () => {
 // Disable zoom, needed for darwin.
 webFrame.setZoomLevel(0)
 webFrame.setVisualZoomLevelLimits(1, 1)
-webFrame.setLayoutZoomLevelLimits(0, 0)
 
 // Initialize auto updates in production environments.
 let updateCheckListener

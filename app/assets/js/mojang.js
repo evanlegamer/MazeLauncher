@@ -14,42 +14,42 @@ const minecraftAgent = {
     name: 'Minecraft',
     version: 1
 }
-const authpath = 'https://authserver.mojang.com'
+const authpath = 'https://mazeauth.mazecity.fr' //'https://authserver.mojang.com'
 const statuses = [
     {
-        service: 'sessionserver.mojang.com',
+        service: 'sessionserver.mazecity.fr',
         status: 'grey',
-        name: 'Multiplayer Session Service',
+        name: 'MazeServers',
         essential: true
     },
     {
-        service: 'authserver.mojang.com',
+        service: 'authserver.mazecity.fr',
         status: 'grey',
-        name: 'Authentication Service',
+        name: 'MazeAuth Service',
         essential: true
     },
     {
-        service: 'textures.minecraft.net',
+        service: 'skin.mazecity.fr',
         status: 'grey',
-        name: 'Minecraft Skins',
+        name: 'MazeSkins System',
         essential: false
     },
     {
-        service: 'api.mojang.com',
+        service: 'api.mazecity.fr',
         status: 'grey',
-        name: 'Public API',
+        name: 'Public MazeAPI',
         essential: false
     },
     {
-        service: 'minecraft.net',
+        service: 'mazecity.fr',
         status: 'grey',
-        name: 'Minecraft.net',
+        name: 'Mazecity.fr',
         essential: false
     },
     {
-        service: 'account.mojang.com',
+        service: 'forum.mazecity.fr',
         status: 'grey',
-        name: 'Mojang Accounts Website',
+        name: 'Mazecity Forum',
         essential: false
     }
 ]
@@ -79,16 +79,16 @@ exports.statusToHex = function(status){
 }
 
 /**
- * Retrieves the status of Mojang's services.
+ * Retrieves the status of Mazecity's services.
  * The response is condensed into a single object. Each service is
  * a key, where the value is an object containing a status and name
  * property.
  * 
- * @see http://wiki.vg/Mojang_API#API_Status
+ * @see http://wiki.vg/Mojang_API#API_Status -> NOW Mazecity
  */
 exports.status = function(){
     return new Promise((resolve, reject) => {
-        request.get('https://status.mojang.com/check',
+        request.get('https://status.mazecity.fr/check/',
             {
                 json: true,
                 timeout: 2500
@@ -96,8 +96,8 @@ exports.status = function(){
             function(error, response, body){
 
                 if(error || response.statusCode !== 200){
-                    logger.warn('Unable to retrieve Mojang status.')
-                    logger.debug('Error while retrieving Mojang statuses:', error)
+                    logger.warn('Unable to retrieve Mazecity status.')
+                    logger.debug('Error while retrieving Mazecity statuses:', error)
                     //reject(error || response.statusCode)
                     for(let i=0; i<statuses.length; i++){
                         statuses[i].status = 'grey'
@@ -143,8 +143,7 @@ exports.authenticate = function(username, password, clientToken, requestUser = t
         if(clientToken != null){
             body.clientToken = clientToken
         }
-
-        request.post(authpath + '/authenticate',
+        request.post(authpath + '/authserver/authenticate',
             {
                 json: true,
                 body
@@ -175,7 +174,7 @@ exports.authenticate = function(username, password, clientToken, requestUser = t
  */
 exports.validate = function(accessToken, clientToken){
     return new Promise((resolve, reject) => {
-        request.post(authpath + '/validate',
+        request.post(authpath + '/authserver/validate',
             {
                 json: true,
                 body: {
@@ -210,7 +209,7 @@ exports.validate = function(accessToken, clientToken){
  */
 exports.invalidate = function(accessToken, clientToken){
     return new Promise((resolve, reject) => {
-        request.post(authpath + '/invalidate',
+        request.post(authpath + '/authserver/invalidate',
             {
                 json: true,
                 body: {
@@ -246,7 +245,7 @@ exports.invalidate = function(accessToken, clientToken){
  */
 exports.refresh = function(accessToken, clientToken, requestUser = true){
     return new Promise((resolve, reject) => {
-        request.post(authpath + '/refresh',
+        request.post(authpath + '/authserver/refresh',
             {
                 json: true,
                 body: {
